@@ -1,3 +1,6 @@
+import { content } from "@/content";
+const { hero } = content;
+
 export default function Hero() {
   return (
     <section className="min-h-screen bg-[#FAF8F5] flex items-center pt-20">
@@ -5,28 +8,28 @@ export default function Hero() {
         {/* Text */}
         <div>
           <p className="text-[#2D5016] text-sm font-medium tracking-widest uppercase mb-6">
-            Golf Gadget by Nomad Golf
+            {hero.eyebrow}
           </p>
           <h1 className="text-5xl lg:text-6xl font-bold text-[#1C1C1C] leading-[1.1] tracking-tight mb-6">
-            Same height.<br />
-            Every tee.<br />
-            Every hole.
+            {hero.headline.map((line, i) => (
+              <span key={i}>{line}<br /></span>
+            ))}
           </h1>
           <p className="text-[#6B6B6B] text-xl leading-relaxed mb-10 max-w-md">
-            The multitool that ends tee height guesswork — for good. Divot tool, ball marker, spare tees, and a consistent tee height every single time.
+            {hero.subheadline}
           </p>
           <div className="flex flex-col sm:flex-row gap-4">
             <a
               href="#product"
               className="bg-[#1C1C1C] text-[#FAF8F5] text-base font-medium px-8 py-4 rounded-full hover:bg-[#2D5016] transition-colors duration-200 text-center"
             >
-              Shop — $24.99
+              {hero.primaryCta}
             </a>
             <a
               href="#how-it-works"
               className="text-[#1C1C1C] text-base font-medium px-8 py-4 rounded-full border border-[#E5E2DC] hover:border-[#1C1C1C] transition-colors duration-200 text-center"
             >
-              See How It Works
+              {hero.secondaryCta}
             </a>
           </div>
         </div>

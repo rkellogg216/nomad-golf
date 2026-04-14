@@ -1,14 +1,16 @@
 "use client";
 
 import { useState } from "react";
+import { content } from "@/content";
+const { product } = content;
 
-const colors = [
-  { name: "White", bg: "#F5F5F5", border: "#D0D0D0" },
-  { name: "Black", bg: "#1C1C1C", border: "#1C1C1C" },
-];
+const colorStyles: Record<string, { bg: string; border: string }> = {
+  White: { bg: "#F5F5F5", border: "#D0D0D0" },
+  Black: { bg: "#1C1C1C", border: "#1C1C1C" },
+};
 
 export default function ProductSection() {
-  const [selectedColor, setSelectedColor] = useState("White");
+  const [selectedColor, setSelectedColor] = useState(product.colors[0]);
   const [qty, setQty] = useState(1);
   const [added, setAdded] = useState(false);
 
@@ -37,15 +39,10 @@ export default function ProductSection() {
 
           {/* Product details */}
           <div>
-            <p className="text-[#2D5016] text-sm font-medium tracking-widest uppercase mb-3">
-              Nomad Golf
-            </p>
-            <h2 className="text-4xl font-bold text-[#1C1C1C] mb-2">Golf Gadget</h2>
-            <p className="text-3xl font-semibold text-[#1C1C1C] mb-6">$24.99</p>
-
-            <p className="text-[#6B6B6B] leading-relaxed mb-8">
-              The golf multitool that eliminates tee height guesswork. Made from flexible TPU — durable, lightweight, and clips to your bag. Available in White and Black.
-            </p>
+            <p className="text-[#2D5016] text-sm font-medium tracking-widest uppercase mb-3">{product.eyebrow}</p>
+            <h2 className="text-4xl font-bold text-[#1C1C1C] mb-2">{product.name}</h2>
+            <p className="text-3xl font-semibold text-[#1C1C1C] mb-6">{product.price}</p>
+            <p className="text-[#6B6B6B] leading-relaxed mb-8">{product.description}</p>
 
             {/* Color selector */}
             <div className="mb-8">
@@ -53,19 +50,20 @@ export default function ProductSection() {
                 Color — <span className="text-[#6B6B6B] font-normal">{selectedColor}</span>
               </p>
               <div className="flex gap-3">
-                {colors.map((c) => (
-                  <button
-                    key={c.name}
-                    onClick={() => setSelectedColor(c.name)}
-                    className={`w-9 h-9 rounded-full border-2 transition-all duration-150 ${
-                      selectedColor === c.name
-                        ? "ring-2 ring-offset-2 ring-[#1C1C1C]"
-                        : "ring-0"
-                    }`}
-                    style={{ backgroundColor: c.bg, borderColor: c.border }}
-                    aria-label={c.name}
-                  />
-                ))}
+                {product.colors.map((c) => {
+                  const style = colorStyles[c] ?? { bg: "#ccc", border: "#999" };
+                  return (
+                    <button
+                      key={c}
+                      onClick={() => setSelectedColor(c)}
+                      className={`w-9 h-9 rounded-full border-2 transition-all duration-150 ${
+                        selectedColor === c ? "ring-2 ring-offset-2 ring-[#1C1C1C]" : "ring-0"
+                      }`}
+                      style={{ backgroundColor: style.bg, borderColor: style.border }}
+                      aria-label={c}
+                    />
+                  );
+                })}
               </div>
             </div>
 
@@ -101,9 +99,7 @@ export default function ProductSection() {
               {added ? "Added ✓" : "Add to Cart"}
             </button>
 
-            <p className="text-[#6B6B6B] text-sm text-center mt-4">
-              Free shipping on orders over $40 · Made in the USA
-            </p>
+            <p className="text-[#6B6B6B] text-sm text-center mt-4">{product.shippingNote}</p>
           </div>
         </div>
       </div>

@@ -1,4 +1,7 @@
-const features = [
+import { content } from "@/content";
+const { features: feat } = content;
+
+const featureIcons = [
   {
     title: "Consistent Tee Height",
     description: "Notched design grips any standard tee head and sets it at the same depth every time. Dial it in once, repeat it forever.",
@@ -53,19 +56,15 @@ export default function Features() {
     <section className="bg-[#FAF8F5] py-24">
       <div className="max-w-6xl mx-auto px-6">
         <div className="mb-16">
-          <p className="text-[#2D5016] text-sm font-medium tracking-widest uppercase mb-4">
-            Everything In One
-          </p>
-          <h2 className="text-4xl font-bold text-[#1C1C1C] leading-tight max-w-lg">
-            Four tools. One clip. Zero excuses.
-          </h2>
+          <p className="text-[#2D5016] text-sm font-medium tracking-widest uppercase mb-4">{feat.eyebrow}</p>
+          <h2 className="text-4xl font-bold text-[#1C1C1C] leading-tight max-w-lg">{feat.headline}</h2>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-          {features.map((f) => (
+          {feat.items.map((f, i) => (
             <div key={f.title} className="group">
               <div className="w-12 h-12 bg-[#F0EDE8] rounded-2xl flex items-center justify-center text-[#1C1C1C] mb-5 group-hover:bg-[#1C1C1C] group-hover:text-[#FAF8F5] transition-colors duration-200">
-                {f.icon}
+                {featureIcons[i]?.icon}
               </div>
               <h3 className="font-semibold text-[#1C1C1C] mb-2 text-lg">{f.title}</h3>
               <p className="text-[#6B6B6B] text-sm leading-relaxed">{f.description}</p>
